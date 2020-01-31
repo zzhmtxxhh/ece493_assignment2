@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ECE493_assignment</string>
+    <string name="undo_inputbox_hint">Please Enter Undo Number</string>
+</resources>
