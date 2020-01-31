@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements
         GestureDetector.OnGestureListener,
         GestureDetector.OnDoubleTapListener{
 
-
-
     private ImageView imageView;
     private Button take_pic;
     private Button undo;
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
 
         gesture_Detector = new GestureDetectorCompat(this,this);
         gesture_Detector.setOnDoubleTapListener(this);
-        undo_input.setFilters( new InputFilter[]  { new ca.ualberta.zhihao9.ece493_zhihao9.inputfilter_minmax(1,10)});
+        undo_input.setFilters( new InputFilter[]  { new ca.ualberta.zhihao9.ece493_zhihao9.inputfilter_minmax(1,100)});
 
         take_pic.setOnClickListener(new View.OnClickListener() {
             @Override

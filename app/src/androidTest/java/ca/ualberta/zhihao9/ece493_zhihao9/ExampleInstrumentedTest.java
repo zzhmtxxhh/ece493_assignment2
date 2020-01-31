@@ -1,4 +1,4 @@
-package ca.ualberta.zhihao9.ece493_assignment;
+package ca.ualberta.zhihao9.ece493_zhihao9;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
