@@ -22,6 +22,7 @@ public class Iprocessor {
     private int numUndo;
     private Bitmap mainBitmap;
 
+    //Constructor
     public Iprocessor(Context context,int undos) {
         this.context = context;
         this.currentImagePath = "";
@@ -31,6 +32,8 @@ public class Iprocessor {
         warpedBitmaps = new ArrayList<>();
     }
 
+
+    //Load the image to the iprocessor object
     public void loadNewImage(Bitmap newImage) {
         this.mainBitmap = newImage;
         if (true) {
@@ -39,41 +42,50 @@ public class Iprocessor {
                     mainBitmap.getHeight() / 5, true);
         }
         if(warpedBitmaps != null) warpedBitmaps.clear();
-
         currentShowingIndex = 0;
         warpedBitmaps.add(mainBitmap.copy(mainBitmap.getConfig(), true));
 
     }
+
+    //Return true if the object contain bitmap file
     public Boolean imageExists() {
-        if(mainBitmap != null) {
-            return true;
-        }else {
-            return false;
-        }
+        return mainBitmap != null;
     }
+
+
+    // Set the number of times for undo
     public void setNumUndo(int num) {
         if (num > 10) {
             this.numUndo = 10;
         }else{
-         this.numUndo = num;
+            this.numUndo = num;
         }
     }
-    public int getNumUndo(){
-        return this.numUndo;
-    }
+
+    //set the image absolute path
     public void setCurrentImagePath(String path){
         this.currentImagePath = path;
     }
 
+
+    //return amount of undo
+    public int getNumUndo(){
+        return this.numUndo;
+    }
+
+
+    // return the current path of the image
     public String getCurrentImagePath() {
+
         return currentImagePath;
     }
 
+
+    // return the current imange bitmap
     public Bitmap getCurrentImage(){
         return mainBitmap;
     }
 
-    //undo list from: https://blog.fossasia.org/implementing-undo-and-redo-in-image-editor-of-phimpme-android/
     private void addToList() {
         if (warpedBitmaps.size() <= numUndo) {
             currentShowingIndex++;
@@ -86,8 +98,8 @@ public class Iprocessor {
     }
 
 
+    // reverse the bitmap to the previous setting
     public void undoBitmap(){
-
         if (currentShowingIndex - 1 >= 0) {
             warpedBitmaps.get(currentShowingIndex).recycle();
             warpedBitmaps.remove(currentShowingIndex);
@@ -100,6 +112,7 @@ public class Iprocessor {
 
     }
 
+    // save the bitmap image into local filesystem and register te file into gallery
     public void saveBitmap(){
         if(imageExists()){
 
@@ -136,6 +149,8 @@ public class Iprocessor {
     }
 
 
+//    add pic to gallery
+//    reference https://stackoverflow.com/questions/8560501/android-save-image-into-gallery
     private void galleryAddPic(File f) {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(f);
@@ -145,6 +160,7 @@ public class Iprocessor {
 
 
 
+    // decrease the image brightness
     public void darkerImage() {
         int height = mainBitmap.getHeight();
         int width = mainBitmap.getWidth();
@@ -165,6 +181,7 @@ public class Iprocessor {
         addToList();
     }
 
+    // blur the images reference http://www.jhlabs.com/ip/blurring.html
     public void blurImage() {
         int height = mainBitmap.getHeight();
         int width = mainBitmap.getWidth();
@@ -222,6 +239,8 @@ public class Iprocessor {
     }
 
 
+    //bulgeimage
+    //reference ece493 example code
     public  void bulgeImage() {
 
         int width = mainBitmap.getWidth();
@@ -271,7 +290,8 @@ public class Iprocessor {
         addToList();
     }
 
-    //Modified from Image Warp Example on Eclass
+
+    //referecne https://introcs.cs.princeton.edu/java/31datatype/Swirl.java.html
     public void swirlImage() {
         int width = mainBitmap.getWidth();
         int height = mainBitmap.getHeight();
@@ -303,7 +323,6 @@ public class Iprocessor {
                 }
                 double radius = Math.sqrt(relativeX*relativeX + relativeY*relativeY);
                 double newAngle = oAngle+factor*radius;
-                //double newAngle = oAngle + (1/(factor*radius + 4.0/Math.PI));
                 int sourceX = (int) Math.floor(radius*Math.cos(newAngle)+0.5);
                 int sourceY = (int) Math.floor(radius*Math.sin(newAngle)+0.5);
                 sourceX += centerX;

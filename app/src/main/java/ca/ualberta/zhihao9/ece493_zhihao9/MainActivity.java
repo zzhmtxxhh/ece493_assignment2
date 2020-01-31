@@ -2,7 +2,6 @@ package ca.ualberta.zhihao9.ece493_zhihao9;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,12 +30,9 @@ public class MainActivity extends AppCompatActivity implements
         GestureDetector.OnGestureListener,
         GestureDetector.OnDoubleTapListener{
 
+
+    // private variable declare
     private ImageView imageView;
-    private Button take_pic;
-    private Button undo;
-    private Button save;
-    private Button summit;
-    private ProgressDialog progress;
     private TextInputEditText undo_input;
     static final int REQUEST_CAMERA_CAPTURE = 1;
     static final int REQUEST_GALLERY = 2 ;
@@ -45,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements
     static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
 
+    //reference https://eclass.srv.ualberta.ca/pluginfile.php/5437232/mod_resource/content/1/AndroidTouchSnippets.txt
+    // Snippet 1
     GestureDetectorCompat gesture_Detector;
     ca.ualberta.zhihao9.ece493_zhihao9.Iprocessor image_Processor;
 
@@ -55,16 +53,14 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        take_pic = findViewById(R.id.load_pic);
+        Button take_pic = findViewById(R.id.load_pic);
         imageView = findViewById(R.id.image_view);
-        undo = findViewById(R.id.undo);
-        save = findViewById(R.id.save);
+        Button undo = findViewById(R.id.undo);
+        Button save = findViewById(R.id.save);
         undo_input = findViewById(R.id.undo_int);
-        summit = findViewById(R.id.summit);
+        Button summit = findViewById(R.id.summit);
         image_Processor = new ca.ualberta.zhihao9.ece493_zhihao9.Iprocessor(this,2);
 
-        progress= new ProgressDialog(this);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         gesture_Detector = new GestureDetectorCompat(this,this);
         gesture_Detector.setOnDoubleTapListener(this);
@@ -136,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // get image from camaera
+        // reference https://www.c-sharpcorner.com/UploadFile/e14021/capture-image-from-camera-and-selecting-image-from-gallery-o/
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CAMERA_CAPTURE) {
                 File f = new File(Environment.getExternalStorageDirectory().toString());
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements
                     image_Processor.loadNewImage(bitmap);
                     imageView.setImageBitmap(image_Processor.getCurrentImage());
                     image_Processor.saveBitmap();
-                    f.delete();
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -227,6 +225,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 
+
+    // reference https://androidtuts4u.blogspot.com/2013/03/swipe-or-onfling-event-android.html
+    // multiple gesture detection
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
