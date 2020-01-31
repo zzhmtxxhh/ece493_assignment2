@@ -81,7 +81,9 @@ public class Iprocessor {
     public Bitmap getCurrentImage(){
         return mainBitmap;
     }
-
+    
+    // implement undo
+    // reference https://blog.fossasia.org/implementing-undo-and-redo-in-image-editor-of-phimpme-android/
     private void addToList() {
         if (warpedBitmaps.size() <= numUndo) {
             currentShowingIndex++;

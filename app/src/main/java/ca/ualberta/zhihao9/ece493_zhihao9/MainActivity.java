@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 image_Processor.setNumUndo(Integer.parseInt(String.valueOf(undo_input.getText())));
-                Toast.makeText(getApplicationContext(), "undo times" + image_Processor.getNumUndo(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "undo times  " + image_Processor.getNumUndo(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -187,10 +187,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onDoubleTap(MotionEvent e) {
-        //TODO ZOOM
         Toast.makeText(this, "onDoubleTap", Toast.LENGTH_SHORT).show();
-
-
         return true;
     }
 
