@@ -16,16 +16,14 @@ import java.util.ArrayList;
 
 public class Iprocessor {
     private Context context;
-    private String currentImagePath;
     private ArrayList<Bitmap> warpedBitmaps;
     private int currentShowingIndex;
     private int numUndo;
     private Bitmap mainBitmap;
 
     //Constructor
-    public Iprocessor(Context context,int undos) {
+    Iprocessor(Context context, int undos) {
         this.context = context;
-        this.currentImagePath = "";
         this.currentShowingIndex = 0;
         this.numUndo = undos;
         this.mainBitmap = null;
@@ -58,10 +56,6 @@ public class Iprocessor {
         this.numUndo = num;
     }
 
-    //set the image absolute path
-    public void setCurrentImagePath(String path){
-        this.currentImagePath = path;
-    }
 
 
     //return amount of undo
@@ -70,18 +64,13 @@ public class Iprocessor {
     }
 
 
-    // return the current path of the image
-    public String getCurrentImagePath() {
-
-        return currentImagePath;
-    }
 
 
     // return the current imange bitmap
     public Bitmap getCurrentImage(){
         return mainBitmap;
     }
-    
+
     // implement undo
     // reference https://blog.fossasia.org/implementing-undo-and-redo-in-image-editor-of-phimpme-android/
     private void addToList() {
