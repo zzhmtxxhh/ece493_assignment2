@@ -55,11 +55,7 @@ public class Iprocessor {
 
     // Set the number of times for undo
     public void setNumUndo(int num) {
-        if (num > 10) {
-            this.numUndo = 10;
-        }else{
-            this.numUndo = num;
-        }
+        this.numUndo = num;
     }
 
     //set the image absolute path
